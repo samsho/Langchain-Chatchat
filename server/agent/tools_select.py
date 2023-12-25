@@ -1,9 +1,8 @@
 from langchain.tools import Tool
+
 from server.agent.tools import *
 
 ## 请注意，如果你是为了使用AgentLM，在这里，你应该使用英文版本。
-from server.agent.tools.db_employee_tool import query_employee, PersonSchema
-
 tools = [
     Tool.from_function(
         func=calculate,
@@ -58,6 +57,12 @@ tools = [
         name="query_employee",
         description="use this tools to search employee info",
         args_schema=PersonSchema,
+    ),
+    Tool.from_function(
+        func=policy_query,
+        name="policy_query",
+        description="use this tools to search policy info",
+        args_schema=PolicySchema,
     ),
 ]
 

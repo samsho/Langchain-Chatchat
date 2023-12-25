@@ -9,3 +9,5 @@ from .search_internet import search_internet, SearchInternetInput
 from .wolfram import wolfram, WolframInput
 from .search_youtube import search_youtube, YoutubeInput
 from .arxiv import arxiv, ArxivInput
+from .db_employee_tool import query_employee, PersonSchema
+from .policy_query import policy_query, PolicySchema
