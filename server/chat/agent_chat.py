@@ -1,22 +1,23 @@
-from langchain.memory import ConversationBufferWindowMemory
+import asyncio
+import json
+from typing import AsyncIterable, Optional
+from typing import List
 
-from server.agent.custom_agent.ChatGLM3Agent import initialize_glm3_agent
-from server.agent.tools_select import tools, tool_names
-from server.agent.callbacks import CustomAsyncIteratorCallbackHandler, Status
-from langchain.agents import LLMSingleActionAgent, AgentExecutor
-from server.agent.custom_template import CustomOutputParser, CustomPromptTemplate
 from fastapi import Body
 from fastapi.responses import StreamingResponse
-from configs import LLM_MODELS, TEMPERATURE, HISTORY_LEN, Agent_MODEL
-from server.utils import wrap_done, get_ChatOpenAI, get_prompt_template
+from langchain.agents import LLMSingleActionAgent, AgentExecutor
 from langchain.chains import LLMChain
-from typing import AsyncIterable, Optional
-import asyncio
-from typing import List
-from server.chat.utils import History
-import json
+from langchain.memory import ConversationBufferWindowMemory
+
+from configs import LLM_MODELS, TEMPERATURE, HISTORY_LEN, Agent_MODEL
 from server.agent import model_container
+from server.agent.callbacks import CustomAsyncIteratorCallbackHandler, Status
+from server.agent.custom_agent.ChatGLM3Agent import initialize_glm3_agent
+from server.agent.custom_template import CustomOutputParser, CustomPromptTemplate
+from server.agent.tools_select import tools, tool_names
+from server.chat.utils import History
 from server.knowledge_base.kb_service.base import get_kb_details
+from server.utils import wrap_done, get_ChatOpenAI, get_prompt_template
 
 
 async def agent_chat(query: str = Body(..., description="用户输入", examples=["恼羞成怒"]),
@@ -102,6 +103,7 @@ async def agent_chat(query: str = Body(..., description="用户输入", examples
                 verbose=True,
             )
         else:
+            print("\n run qianfan agent .....................................")
             agent = LLMSingleActionAgent(
                 llm_chain=llm_chain,
                 output_parser=output_parser,

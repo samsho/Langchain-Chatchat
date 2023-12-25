@@ -2,6 +2,7 @@ from langchain.tools import Tool
 from server.agent.tools import *
 
 ## 请注意，如果你是为了使用AgentLM，在这里，你应该使用英文版本。
+from server.agent.tools.db_employee_tool import query_employee, PersonSchema
 
 tools = [
     Tool.from_function(
@@ -51,6 +52,12 @@ tools = [
         name="search_youtube",
         description="use this tools to search youtube videos",
         args_schema=YoutubeInput,
+    ),
+    Tool.from_function(
+        func=query_employee,
+        name="query_employee",
+        description="use this tools to search employee info",
+        args_schema=PersonSchema,
     ),
 ]
 

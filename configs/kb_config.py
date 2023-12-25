@@ -1,6 +1,6 @@
 import os
 
-# 默认使用的知识库
+# 默认使用的知识库 Insurance professional knowledge base
 DEFAULT_KNOWLEDGE_BASE = "samples"
 
 # 默认向量库/全文检索引擎类型。可选：faiss, milvus(离线) & zilliz(在线), pgvector,全文检索引擎es
@@ -57,7 +57,7 @@ ZH_TITLE_ENHANCE = False
 # 每个知识库的初始化介绍，用于在初始化知识库时显示和Agent调用，没写则没有介绍，不会被Agent调用。
 KB_INFO = {
     "知识库名称": "知识库介绍",
-    "samples": "关于本项目issue的解答",
+    "samples": "保险公司专业知识库",
 }
 
 

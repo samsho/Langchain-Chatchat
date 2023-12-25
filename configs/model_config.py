@@ -77,8 +77,8 @@ ONLINE_LLM_MODEL = {
     "qianfan-api": {
         "version": "ERNIE-Bot",  # 注意大小写。当前支持 "ERNIE-Bot" 或 "ERNIE-Bot-turbo"， 更多的见官方文档。
         "version_url": "",  # 也可以不填写version，直接填写在千帆申请模型发布的API地址
-        "api_key": "ALTAKORErYH8Jc1dsNav44vJ5E",
-        "secret_key": "9e0b501c352a4c80ad9ba8f8b1fdbf8a",
+        "api_key": "KBe3HbStsjvnGS9KFrNZFPes",
+        "secret_key": "3yGoXGIdCCy8QLwcLCLdh3UGGlM7PKNn",
         "provider": "QianFanWorker",
     },
 
