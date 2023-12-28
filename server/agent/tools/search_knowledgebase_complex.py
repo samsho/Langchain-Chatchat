@@ -1,20 +1,24 @@
 from __future__ import annotations
+
+import asyncio
 import json
 import re
 import warnings
 from typing import Dict
+from typing import List, Any, Optional
+
 from langchain.callbacks.manager import AsyncCallbackManagerForChainRun, CallbackManagerForChainRun
 from langchain.chains.llm import LLMChain
+from langchain.prompts import PromptTemplate
 from langchain.pydantic_v1 import Extra, root_validator
 from langchain.schema import BasePromptTemplate
 from langchain.schema.language_model import BaseLanguageModel
-from typing import List, Any, Optional
-from langchain.prompts import PromptTemplate
-from server.chat.knowledge_base_chat import knowledge_base_chat
-from configs import VECTOR_SEARCH_TOP_K, SCORE_THRESHOLD, MAX_TOKENS
-import asyncio
-from server.agent import model_container
 from pydantic import BaseModel, Field
+
+from configs import VECTOR_SEARCH_TOP_K, SCORE_THRESHOLD, MAX_TOKENS
+from server.agent import model_container
+from server.chat.knowledge_base_chat import knowledge_base_chat
+
 
 async def search_knowledge_base_iter(database: str, query: str) -> str:
     response = await knowledge_base_chat(query=query,
@@ -80,10 +84,13 @@ bigdata,大数据的就业情况如何
 Question: ${{用户的问题}}
 
 ```text
+
 ${{知识库名称,查询问题,不要带有任何除了,之外的符号,比如不要输出中文的逗号，不要输出引号}}
+```
 
 ```output
 数据库查询的结果
+```
 
 现在，我们开始作答
 问题: {question}
@@ -157,18 +164,20 @@ class LLMKnowledgeChain(LLMChain):
         run_manager.on_text(llm_output, color="green", verbose=self.verbose)
 
         llm_output = llm_output.strip()
-        # text_match = re.search(r"^```text(.*?)```", llm_output, re.DOTALL)
-        text_match = re.search(r"```text(.*)", llm_output, re.DOTALL)
+        text_match = re.search(r"^```text(.*?)```", llm_output, re.DOTALL)
+        # text_match = re.search(r"```text(.*)", llm_output, re.DOTALL)
         if text_match:
             expression = text_match.group(1).strip()
             cleaned_input_str = (expression.replace("\"", "").replace("“", "").
                                  replace("”", "").replace("```", "").strip())
             lines = cleaned_input_str.split("\n")
+            print("知识库查询： \n")
+            print(lines)
             # 使用逗号分割每一行，然后形成一个（数据库，查询）元组的列表
 
             try:
                 queries = [(line.split(",")[0].strip(), line.split(",")[1].strip()) for line in lines]
-            except:
+            except Exception as e:
                 queries = [(line.split("，")[0].strip(), line.split("，")[1].strip()) for line in lines]
             run_manager.on_text("知识库查询询内容:\n\n" + str(queries) + " \n\n", color="blue", verbose=self.verbose)
             output = self._evaluate_expression(queries)
@@ -271,8 +280,10 @@ def search_knowledgebase_complex(query: str):
     ans = llm_knowledge.run(query)
     return ans
 
+
 class KnowledgeSearchInput(BaseModel):
-    location: str = Field(description="The query to be searched")
+    query: str = Field(description="The query to be searched""需要在本地知识库中搜索的查询的内容")
+
 
 if __name__ == "__main__":
     result = search_knowledgebase_complex("机器人和大数据在代码教学上有什么区别")

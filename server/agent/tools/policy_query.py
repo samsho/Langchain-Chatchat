@@ -1,6 +1,7 @@
 """保单信息查询工具"""
 from __future__ import annotations
 
+import logging
 import os
 import re
 import sys
@@ -111,7 +112,8 @@ def query_policy(policy):
     try:
         response = requests.post(base_url, headers=headers, data=params)
         data = response.json()
-    except Exception :
+    except Exception as e:
+        logging.exception("请求保单查询接口异常，以下返回默认值数据")
         data = {
             "plyDetail": {
                 "applicant": {

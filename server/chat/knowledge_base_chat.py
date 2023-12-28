@@ -94,8 +94,12 @@ async def knowledge_base_chat(query: str = Body(..., description="用户输入",
         for inum, doc in enumerate(docs):
             filename = doc.metadata.get("source")
             parameters = urlencode({"knowledge_base_name": knowledge_base_name, "file_name": filename})
-            base_url = request.base_url
-            url = f"{base_url}knowledge_base/download_doc?" + parameters
+            # fix 修复 knowledge agent 调用时BUG
+            if request:
+                base_url = request.base_url
+                url = f"{base_url}knowledge_base/download_doc?" + parameters
+            else:
+                url = ''
             text = f"""出处 [{inum + 1}] [{filename}]({url}) \n\n{doc.page_content}\n\n"""
             source_documents.append(text)
 

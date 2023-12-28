@@ -87,6 +87,25 @@ PROMPT_TEMPLATES = {
             'Question: {input}\n\n'
             'Thought: {agent_scratchpad}\n',
 
+        "qianfan":
+            '你是一个擅长使用工具以解决问题的智能助理，你应该使用工具逐步解决问题。如果工具不能解决问题，可以优先尝试知识库来回答'
+            '在解决问题之前，你不需要和用户进行对话'
+            '你可以使用以下工具::\n\n'
+            '{tools}\n\n'
+            'Use the following format:\n'
+            'Question: the input question you must answer1\n'
+            'Thought: you should always think about what to do and what tools to use.\n'
+            'Action: the action to take, should be one of [{tool_names}]\n'
+            'Action Input: the input to the action\n'
+            'Observation: the result of the action\n'
+            '... (this Thought/Action/Action Input/Observation can be repeated zero or more times)\n'
+            'Thought: I now know the final answer\n'
+            'Final Answer: the final answer to the original input question\n'
+            'Begin!Reminder to ALWAYS respond with a valid result of a single action. Use tools if necessary. \n\n'
+            'history: {history}\n\n'
+            'Question: {input}\n\n'
+            'Thought: {agent_scratchpad}\n',
+
         "ChatGLM3":
             'You can answer using the tools, or answer directly using your knowledge without using the tools. '
             'Respond to the human as helpfully and accurately as possible.\n'

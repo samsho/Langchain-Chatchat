@@ -22,7 +22,7 @@ EMBEDDING_MODEL_OUTPUT_PATH = "output"
 LLM_MODELS = ["qianfan-api"] # "Qwen-1_8B-Chat",
 
 # AgentLM模型的名称 (可以不指定，指定之后就锁定进入Agent之后的Chain的模型，不指定就是LLM_MODELS[0])
-Agent_MODEL = None
+Agent_MODEL = "qianfan-api"
 
 # LLM 运行设备。设为"auto"会自动检测，也可手动设定为"cuda","mps","cpu"其中之一。
 LLM_DEVICE = "auto"

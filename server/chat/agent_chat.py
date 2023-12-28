@@ -102,8 +102,9 @@ async def agent_chat(query: str = Body(..., description="用户输入", examples
                 memory=memory,
                 verbose=True,
             )
+
         else:
-            print("\n run qianfan agent .....................................")
+            print("\n run qianfan agent custom prompt.....................................")
             agent = LLMSingleActionAgent(
                 llm_chain=llm_chain,
                 output_parser=output_parser,
