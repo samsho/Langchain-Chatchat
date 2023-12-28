@@ -12,7 +12,7 @@ EMBEDDING_MODEL = "bge-large-zh"
 EMBEDDING_DEVICE = "auto"
 
 # 如果需要在 EMBEDDING_MODEL 中增加自定义的关键字时配置
-EMBEDDING_KEYWORD_FILE = "keywords.txt"
+EMBEDDING_KEYWORD_FILE = "embedding_keywords.txt"
 EMBEDDING_MODEL_OUTPUT_PATH = "output"
 
 # 要运行的 LLM 名称，可以包括本地模型和在线模型。列表中本地模型将在启动项目时全部加载。

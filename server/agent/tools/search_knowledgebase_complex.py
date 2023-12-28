@@ -37,6 +37,7 @@ async def search_knowledge_base_iter(database: str, query: str) -> str:
         data = json.loads(data)
         contents += data["answer"]
         docs = data["docs"]
+        # contents += (data["answer"] + "\n" + str(data["docs"]))
     return contents
 
 

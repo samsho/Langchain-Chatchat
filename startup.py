@@ -644,7 +644,7 @@ async def start_main_server():
         args.model_worker = False
         run_mode = "lite"
 
-    dump_server_info(args=args)
+    # dump_server_info(args=args)
 
     if len(sys.argv) > 1:
         logger.info(f"正在启动服务：")
