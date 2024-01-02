@@ -6,7 +6,7 @@ import shutil
 
 
 # 是否显示详细日志
-log_verbose = False
+log_verbose = True
 langchain.verbose = False
 
 # 通常情况下不需要更改以下内容

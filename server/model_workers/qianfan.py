@@ -146,7 +146,8 @@ class QianFanWorker(ApiModelWorker):
                     if line.startswith("data: "):
                         line = line[6:]
                     resp = json.loads(line)
-
+                    if log_verbose:
+                        logger.info(f'{self.__class__.__name__}:resp: {resp}')
                     if "result" in resp.keys():
                         text += resp["result"]
                         yield {

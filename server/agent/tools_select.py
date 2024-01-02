@@ -31,7 +31,8 @@ tools = [
     Tool.from_function(
         func=search_knowledgebase_complex,
         name="search_knowledgebase_complex",
-        description="Use Use this tool to search local knowledgebase and get information",
+        description="Use this tool to search local knowledgebase and get information"
+                    "查询保险、保险监管相关的专业知识，请使用它",
         args_schema=KnowledgeSearchInput,
     ),
     # Tool.from_function(
@@ -61,7 +62,7 @@ tools = [
     Tool.from_function(
         func=policy_query,
         name="policy_query",
-        description="use this tools to search policy info",
+        description="use this tool to search policy info",
         args_schema=PolicySchema,
     ),
 ]
