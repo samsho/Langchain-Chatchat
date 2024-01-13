@@ -14,7 +14,7 @@ conda activate Langchain-Chatchat
 
 ```js
 # 安装依赖
-pip install -r requirements.txt
+pip install --upgrade --no-deps -r requirements-sm.txt
 ```
 
 3、 初始化数据
@@ -32,20 +32,23 @@ python startup.py -a --lite
 ```
 
 
-5、操作测试
 
-```text
-查询用户92V31O6295RT916GJEK91D9FR60A32的保单信息
+## 镜像打包
 
-查询92V31O6295RT916GJEK91D9FR60A32名下保单号为62300504643的保单信息
+确保环境已安装docker并且镜像源改为国内的（如：https://docker.mirrors.tuna.tsinghua.edu.cn）。
 
-查询92V31O6295RT916GJEK91D9FR60A32的保单信息
+进入Dockerfile所在目录执行如下命令构建进行与启动。
 
-保险的定义
-
-投保人的定义
-
-什么是分红险
-
-East 系统是做什么的
+```dockerfile
+# 构建
+docker build -t langchain:1.0.1 .
+# 查看
+docker images
+# 运行 ip地址为服务器的内网地址
+docker run -d -p 172.17.0.13:8501:8501 --name langchain langchain:1.0.1
+# 推送到远程仓库（可选，换成自己的仓库地址）
+docker login registry.cn-hangzhou.aliyuncs.com
+docker tag langchain:1.0.1 registry.cn-hangzhou.aliyuncs.com/motry/langchain:1.0.1
+docker push registry.cn-hangzhou.aliyuncs.com/motry/langchain:1.0.1
 ```
+
